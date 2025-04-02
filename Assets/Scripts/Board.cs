@@ -34,18 +34,18 @@ public class Board : MonoBehaviour
     }
     private void Setup()
     {
-        for(int x = 0; x < width; x++)
+        for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 Vector2 pos = new Vector2(x, y);
-                GameObject bgTile= Instantiate(bgTilePrefab, pos, Quaternion.identity);
-                bgTile.transform.parent =this.transform;
+                GameObject bgTile = Instantiate(bgTilePrefab, pos, Quaternion.identity);
+                bgTile.transform.parent = this.transform;
                 bgTile.name = $"BG Tile - {x} , {y}";
                 //Gem
                 int gemToUse = Random.Range(0, gems.Length);
                 int interactions = 0;
-                while(MatchesAt(new Vector2Int(x,y), gems[gemToUse]) && interactions < 100)
+                while (MatchesAt(new Vector2Int(x, y), gems[gemToUse]) && interactions < 100)
                 {
                     gemToUse = Random.Range(0, gems.Length);
                     interactions++;
@@ -61,24 +61,24 @@ public class Board : MonoBehaviour
         gem.transform.parent = this.transform;
         gem.name = $"Gem {pos.x} , {pos.y}";
 
-        allGems[pos.x,pos.y] = gem;
+        allGems[pos.x, pos.y] = gem;
 
-        gem.SetupGem(pos,this);
+        gem.SetupGem(pos, this);
     }
     bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)
     {
         if (posToCheck.x > 1)
         {
-            if (allGems[posToCheck.x - 1,posToCheck.y].type == gemToCheck.type &&
+            if (allGems[posToCheck.x - 1, posToCheck.y].type == gemToCheck.type &&
                 allGems[posToCheck.x - 2, posToCheck.y].type == gemToCheck.type)
-            { 
+            {
                 return true;
             }
         }
         if (posToCheck.y > 1)
         {
             if (allGems[posToCheck.x, posToCheck.y - 1].type == gemToCheck.type &&
-                allGems[posToCheck.x , posToCheck.y - 2].type == gemToCheck.type)
+                allGems[posToCheck.x, posToCheck.y - 2].type == gemToCheck.type)
             {
                 return true;
             }
@@ -92,7 +92,7 @@ public class Board : MonoBehaviour
             if (allGems[position.x, position.y].isMatched)
             {
                 Destroy(allGems[position.x, position.y].gameObject);
-                allGems[position.x, position.y] = null; 
+                allGems[position.x, position.y] = null;
             }
         }
     }
@@ -105,6 +105,31 @@ public class Board : MonoBehaviour
                 DestroyMatchedGemAt(matchFind.currentMathches[i].posIndex);
             }
         }
+        StartCoroutine(DecreaseRowCor());
     }
+    private IEnumerator DecreaseRowCor()
+    {
+        yield return new WaitForSeconds(.2f);
+        int nullCounter = 0;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
 
+                if (allGems[x, y] == null)
+                {
+                    nullCounter++;
+                }
+                else if(nullCounter > 0)
+                {
+                    allGems[x,y].posIndex.y -= nullCounter;
+                    allGems[x, y - nullCounter] = allGems[x,y];
+                    allGems[x,y] = null;
+                }
+
+            }
+            nullCounter = 0;
+        }
+        
+    }
 }
