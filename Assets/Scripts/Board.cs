@@ -11,6 +11,9 @@ public class Board : MonoBehaviour
     public Gem[] gems;
     public Gem[,] allGems;
 
+    public Gem bomb;
+    public float bombChance = 2f;
+
     public float gemSpeed;
 
     [HideInInspector]
@@ -59,6 +62,10 @@ public class Board : MonoBehaviour
     }
     private void SpawnGem(Vector2Int pos, Gem gemToSpawn)
     {
+        if(Random.Range(0f,100f) < bombChance)
+        {
+            gemToSpawn = bomb;
+        }
         Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + height, 0f), Quaternion.identity);
         gem.transform.parent = this.transform;
         gem.name = $"Gem {pos.x} , {pos.y}";
@@ -93,6 +100,7 @@ public class Board : MonoBehaviour
         {
             if (allGems[position.x, position.y].isMatched)
             {
+                Instantiate(allGems[position.x, position.y].destroyEffect, new Vector2(position.x, position.y), Quaternion.identity);
                 Destroy(allGems[position.x, position.y].gameObject);
                 allGems[position.x, position.y] = null;
             }

@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   posIndex: {x: 0, y: 0}
   board: {fileID: 0}
+  isMatched: 0
+  destroyEffect: {fileID: 4030580240872189952, guid: 9348869e37d76fd41aecb8fdecdef2ce, type: 3}
   type: 4
 --- !u!61 &-1943580068980885149
 BoxCollider2D:

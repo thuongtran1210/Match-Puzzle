@@ -20,13 +20,16 @@ public class Gem : MonoBehaviour
     public bool isMatched;
 
     private Vector2Int previousPos;
+
+    public GameObject destroyEffect;
     public enum GemType
     {
         blue,
         green,
         red,
         yellow,
-        purple
+        purple,
+        bomb
     }
     public GemType type;
 
@@ -41,7 +44,7 @@ public class Gem : MonoBehaviour
     {
         if (Vector2.Distance(transform.position,posIndex) > 0.01f)
         {
-           transform.position = Vector2.Lerp(
+               transform.position = Vector2.Lerp(
                transform.position,
                posIndex,
                board.gemSpeed * Time.deltaTime);
