@@ -14,7 +14,7 @@ public class MatchFinder : MonoBehaviour
     }
     public void FindAllMatches()
     {
-        //currentMathches.Clear();
+        currentMathches.Clear();
         for (int x = 0; x < board.width; x++)
         {
             for (int y = 0; y < board.height; y++)
@@ -69,3 +69,4 @@ public class MatchFinder : MonoBehaviour
     }
 
 }
+ 
