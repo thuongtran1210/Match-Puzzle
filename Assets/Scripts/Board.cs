@@ -197,4 +197,5 @@ public class Board : MonoBehaviour
             Destroy(g.gameObject);
         }
     }
+
 }

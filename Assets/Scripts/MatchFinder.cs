@@ -66,6 +66,79 @@ public class MatchFinder : MonoBehaviour
         {
             currentMathches = currentMathches.Distinct().ToList();
         }
+        CheckForBombs();
+    }
+    public void CheckForBombs()
+    {
+        for (int i = 0; i < currentMathches.Count; i++)
+        {
+            Gem gem = currentMathches[i];
+
+            int x = gem.posIndex.x;
+            int y = gem.posIndex.y;
+            // Check left pos x the Bomb
+            if (gem.posIndex.x > 0)
+            {
+                if (board.allGems[x - 1,y] !=null )
+                {
+                    if (board.allGems[x - 1, y].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArena(new Vector2Int(x-1,y), board.allGems[x-1,y]);
+                    }
+                }
+            }
+            // Check right pos x the bomb
+            if (gem.posIndex.x < board.width - 1)
+            {
+                if (board.allGems[x + 1, y] != null)
+                {
+                    if (board.allGems[x + 1, y].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArena(new Vector2Int(x + 1, y), board.allGems[x + 1, y]);
+                    }
+                }
+            }
+            // Check left pos y the Bomb
+            if (gem.posIndex.y > 0)
+            {
+                if (board.allGems[x , y - 1] != null)
+                {
+                    if (board.allGems[x, y - 1].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArena(new Vector2Int(x, y - 1), board.allGems[x, y - 1]);
+                    }
+                }
+            }
+            // Check right pos y the bomb
+            if (gem.posIndex.y <  board.height -1 )
+            {
+                if (board.allGems[x, y + 1] != null)
+                {
+                    if (board.allGems[x, y + 1].type == Gem.GemType.bomb)
+                    {
+                        MarkBombArena(new Vector2Int(x, y + 1), board.allGems[x, y + 1]);
+                    }
+                }
+            }
+        }
+    }
+    public void MarkBombArena(Vector2Int bombPos, Gem theBomb)
+    {
+        for (int x = bombPos.x - theBomb.blastSize; x <=bombPos.x + theBomb.blastSize; x++)
+        {
+            for (int y = bombPos.y - theBomb.blastSize; y <= bombPos.y + theBomb.blastSize; y++)
+            {
+                if (x >= 0 && x < board.width && y>= 0 && y < board.height)
+                {
+                    if (board.allGems[x, y] != null)
+                    {
+                        board.allGems[x, y].isMatched = true;
+                        currentMathches.Add(board.allGems[x, y]);
+                    }
+                }
+            }
+        }
+        currentMathches = currentMathches.Distinct().ToList();
     }
 
 }
