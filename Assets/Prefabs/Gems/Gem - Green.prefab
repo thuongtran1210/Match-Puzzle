@@ -102,6 +102,8 @@ MonoBehaviour:
   board: {fileID: 0}
   isMatched: 0
   destroyEffect: {fileID: 3630071111127405382, guid: 49a293ad152772a48b82afc1f56eaa72, type: 3}
+  blastSize: 2
+  scoreValue: 15
   type: 1
 --- !u!61 &1795821666496527037
 BoxCollider2D:

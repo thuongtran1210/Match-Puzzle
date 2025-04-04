@@ -22,7 +22,8 @@ public class Gem : MonoBehaviour
     private Vector2Int previousPos;
 
     public GameObject destroyEffect;
-    public int blastSize = 2; 
+    public int blastSize = 2;
+    public int scoreValue = 10;
     public enum GemType
     {
         blue,
@@ -58,7 +59,7 @@ public class Gem : MonoBehaviour
         if (mousePressed && Input.GetMouseButtonUp(0))
         { 
             mousePressed = false;
-            if (board.currentState == Board.BoardState.move)
+            if (board.currentState == Board.BoardState.move && board.roundManager.roundTime > 0)
             {
                 finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 CalculateAngle();
@@ -74,7 +75,7 @@ public class Gem : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (board.currentState == Board.BoardState.move)
+        if (board.currentState == Board.BoardState.move && board.roundManager.roundTime > 0)
         {
             firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePressed = true;

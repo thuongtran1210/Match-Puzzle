@@ -20,9 +20,14 @@ public class Board : MonoBehaviour
     public MatchFinder matchFind;
     public enum BoardState {wait, move }
     public BoardState currentState = BoardState.move;
+
+    [HideInInspector]
+    public RoundManager roundManager;
+    private float bonusMulti;
     private void Awake()
     {
         matchFind = FindObjectOfType<MatchFinder>();
+        roundManager = FindObjectOfType<RoundManager>();
 
     }
     // Start is called before the first frame update
@@ -116,6 +121,7 @@ public class Board : MonoBehaviour
         {
             if (matchFind.currentMathches[i] != null)
             {
+                ScoreCheck(matchFind.currentMathches[i]);
                 DestroyMatchedGemAt(matchFind.currentMathches[i].posIndex);
             }
         }
@@ -233,6 +239,10 @@ public class Board : MonoBehaviour
             }
             StartCoroutine(FillBoardCor());
         }
+    }
+    public void ScoreCheck(Gem gemToCheck)
+    {
+        roundManager.currentScore += gemToCheck.scoreValue;
     }
 
 }
