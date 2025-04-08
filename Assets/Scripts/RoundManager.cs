@@ -11,6 +11,7 @@ public class RoundManager : MonoBehaviour
     public int currentScore;
     public float displayScore;
     public float scoreSpeed;
+    public int scoreTarget1, scoreTarget2, scoreTarget3;
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,6 +43,26 @@ public class RoundManager : MonoBehaviour
     private void WinCheck()
     {
         uiManager.roundOverScreen.SetActive(true);
+        uiManager.winScore.text = currentScore.ToString("0");
+        if (currentScore >= scoreTarget3)
+        {
+            uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
+            uiManager.winStar.transform.GetChild(1).gameObject.SetActive(true);
+            uiManager.winStar.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        else if (currentScore >= scoreTarget2)
+        {
+            uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
+            uiManager.winStar.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else if (currentScore >= scoreTarget1)
+        {
+            uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            uiManager.winText.text = "Oh no try again!";
+        }
 
     }
 }

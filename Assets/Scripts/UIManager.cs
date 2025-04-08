@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text timeText;
     public TMP_Text scoreText;
+    public TMP_Text winScore;
+    public TMP_Text winText;
+    public GameObject winStar;
     public GameObject roundOverScreen;
     // Start is called before the first frame update
     void Start()
