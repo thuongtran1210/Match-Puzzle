@@ -476,6 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1415702851}
   - component: {fileID: 1415702850}
+  - component: {fileID: 1415702852}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -529,6 +530,49 @@ Transform:
   - {fileID: 1029691423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415702852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415702849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf659432aad668344b7353694cc75e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allRows:
+  - gemsInRow:
+    - {fileID: 5546536832489558709, guid: 03749eeec9be73d45a90f9d4ab6beaa0, type: 3}
+    - {fileID: 1207488778392674888, guid: 6f78b041fdadcf146a811437823ea253, type: 3}
+    - {fileID: 4821100171977715361, guid: f58782c779e83ed44b49c74213f3f22a, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - gemsInRow:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &1507090675
 GameObject:
   m_ObjectHideFlags: 0

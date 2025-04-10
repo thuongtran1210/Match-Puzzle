@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
@@ -49,15 +50,24 @@ public class RoundManager : MonoBehaviour
             uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
             uiManager.winStar.transform.GetChild(1).gameObject.SetActive(true);
             uiManager.winStar.transform.GetChild(2).gameObject.SetActive(true);
+
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star2", 1);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star3", 1);
         }
         else if (currentScore >= scoreTarget2)
         {
             uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
             uiManager.winStar.transform.GetChild(1).gameObject.SetActive(true);
+
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star2", 1);
         }
         else if (currentScore >= scoreTarget1)
         {
             uiManager.winStar.transform.GetChild(0).gameObject.SetActive(true);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_Star1", 1);
+
         }
         else
         {

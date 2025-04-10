@@ -25,16 +25,22 @@ public class Board : MonoBehaviour
     public RoundManager roundManager;
     private float bonusMulti;
     public float bonusAmount = 0.5f;
+
+    private BoardLayout boardLayout;
+    private Gem[,] layoutStore;
     private void Awake()
     {
         matchFind = FindObjectOfType<MatchFinder>();
         roundManager = FindObjectOfType<RoundManager>();
+        boardLayout = GetComponent<BoardLayout>();
 
     }
     // Start is called before the first frame update
     void Start()
     {
         allGems = new Gem[width, height];
+
+        layoutStore = new Gem[width, height];
 
         Setup();
 
@@ -49,6 +55,11 @@ public class Board : MonoBehaviour
     }
     private void Setup()
     {
+        if (boardLayout != null)
+        {
+            layoutStore = boardLayout.GetLayout();
+        }
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -57,16 +68,25 @@ public class Board : MonoBehaviour
                 GameObject bgTile = Instantiate(bgTilePrefab, pos, Quaternion.identity);
                 bgTile.transform.parent = this.transform;
                 bgTile.name = $"BG Tile - {x} , {y}";
-                //Gem
-                int gemToUse = Random.Range(0, gems.Length);
-                int interactions = 0;
-                while (MatchesAt(new Vector2Int(x, y), gems[gemToUse]) && interactions < 100)
+
+                if (layoutStore[x, y] != null)
                 {
-                    gemToUse = Random.Range(0, gems.Length);
-                    interactions++;
+                    SpawnGem(new Vector2Int(x, y), layoutStore[x, y]);
+                }
+                else
+                {
+                    //Gem
+                    int gemToUse = Random.Range(0, gems.Length);
+                    int interactions = 0;
+                    while (MatchesAt(new Vector2Int(x, y), gems[gemToUse]) && interactions < 100)
+                    {
+                        gemToUse = Random.Range(0, gems.Length);
+                        interactions++;
+                    }
+
+                    SpawnGem(new Vector2Int(x, y), gems[gemToUse]);
                 }
 
-                SpawnGem(new Vector2Int(x, y), gems[gemToUse]);
             }
         }
     }
